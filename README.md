@@ -81,8 +81,8 @@ app.get("/", (req, res) => {
     res.send("Servidor Node.js con Express en EC2");
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
+const PORT = 5000;
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
 ```
@@ -196,6 +196,17 @@ sudo systemctl restart apache2
 
 ![image](https://github.com/user-attachments/assets/fc3db1af-dce1-460b-b1d6-45d563b25a4e)
 
+----
+
+5️⃣ **Habilitar HTTPS con Let's Encrypt**
+
+- Para tener un certificado SSL gratuito para tu subdominio, usa Certbot:
+```bash
+sudo apt install certbot python3-certbot-apache -y
+sudo certbot --apache -d tesmoney.ddnsfree.com
+```
+
+Esto activará HTTPS y redirigirá automáticamente el tráfico HTTP a HTTPS.
 
 
 
