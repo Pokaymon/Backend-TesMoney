@@ -123,3 +123,8 @@ pm2 list
 ```bash
 pm2 stop TesBackend
 ```
+
+---
+
+## 💻 **Usar Apache2 como Proxy inverso para poder agregar un subdominio**
+### 🛠️ **Pasos para Configurar Apach2**
