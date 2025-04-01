@@ -48,6 +48,8 @@ node -v
 npm -v
 ```
 
+---
+
 ## ⚙️ **Configurar Backend con Express**
 
 - Crear Carpeta para el proyecto
@@ -88,4 +90,36 @@ app.listen(PORT, () => {
 - Iniciar el Servidor
 ```bash
 node server.js
+```
+
+---
+
+## 🔥 **Mantener el Servidor Corriendo**
+
+Se puede hacer uso de pm2:
+
+- Instalar pm2
+```bash
+sudo npm install -g pm2
+```
+
+- Ejecutar App con pm2
+```bash
+pm2 start server.js --name TesBackend
+```
+
+- Guardar la configuración para el reinicio
+```bash
+pm2 save
+pm2 startup
+```
+
+- Ver Lista de Procesos en Ejecución
+```bash
+pm2 list
+```
+
+- Detener App
+```bash
+pm2 stop TesBackend
 ```
