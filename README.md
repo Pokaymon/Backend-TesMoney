@@ -129,6 +129,8 @@ pm2 stop TesBackend
 ## 💻 **Usar Apache2 como Proxy inverso para poder agregar un subdominio**
 ### 🛠️ **Pasos para Configurar Apache2**
 
+----
+
 1️⃣ **Instalar Apache2**
 
 Ejecutar:
@@ -156,6 +158,44 @@ sudo a2enmod proxy
 sudo a2enmod proxy_http
 sudo systemctl restart apache2
 ```
+
+----
+
+3️⃣ **Configurar Apache para el subdominio**
+
+- Crear archivo de configuración:
+```bash
+sudo nano /etc/apache2/sites-available/TesMoney.conf
+```
+
+- Agregar esta configuración:
+```bash
+<VirtualHost *:80>
+    ServerName tesmoney.ddnsfree.com
+
+    ProxyRequests Off
+    ProxyPass / http://localhost:5000/
+    ProxyPassReverse / http://localhost:5000/
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+----
+
+4️⃣ **Activar la configuración**
+
+- Ejecutar los siguientes comandos:
+```bash
+sudo a2ensite TesMoney.conf
+sudo systemctl restart apache2
+```
+
+- Apuntar el Subdominio a la ip publica:
+
+![image](https://github.com/user-attachments/assets/fc3db1af-dce1-460b-b1d6-45d563b25a4e)
+
 
 
 
