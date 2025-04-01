@@ -146,7 +146,7 @@ Si no esta activo, iniciarlo con:
 sudo systemctl start apache2
 ```
 
---
+----
 
 2️⃣ **Habilitar los modulos del proxy**
 
