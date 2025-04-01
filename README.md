@@ -47,3 +47,45 @@ sudo apt install -y nodejs npm
 node -v
 npm -v
 ```
+
+## ⚙️ **Configurar Backend con Express**
+
+- Crear Carpeta para el proyecto
+ ```bash
+mkdir backend && cd backend
+```
+
+- Inicializar un proyecto Node.js
+```bash
+npm init -y
+```
+
+- Instalar Express
+```bash
+npm install express
+```
+
+- Crear archivo server.js
+```bash
+nano server.js
+```
+
+- Agregar codigo a server.js
+```bash
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+    res.send("Servidor Node.js con Express en EC2");
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+```
+
+- Iniciar el Servidor
+```bash
+node server.js
+```
