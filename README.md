@@ -128,6 +128,7 @@ pm2 stop TesBackend
 
 ## 💻 **Usar Apache2 como Proxy inverso para poder agregar un subdominio**
 ### 🛠️ **Pasos para Configurar Apache2**
+
 1️⃣ **Instalar Apache2**
 
 Ejecutar:
@@ -144,3 +145,17 @@ Si no esta activo, iniciarlo con:
 ```bash
 sudo systemctl start apache2
 ```
+
+--
+
+2️⃣ **Habilitar los modulos del proxy**
+
+Ejecutar los comandos para habilitar modulos necesarios:
+```bash
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo systemctl restart apache2
+```
+
+
+
