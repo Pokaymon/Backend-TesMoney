@@ -29,5 +29,21 @@ Guia para la configuración de Node.js en Instancia EC2 Ubuntu
 
 - Conectarse a la instancia por medio de SSH:
 ```bash
-ssh -i "tu-clave.pem" ubuntu@ip-publica
+ssh -i "clave.pem" ubuntu@ip-publica
+```
+
+- Actualizar Paquetes
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+- Insatalar Node.js y npm
+```bash
+sudo apt install -y nodejs npm
+```
+
+- Verificar la instalación
+```bash
+node -v
+npm -v
 ```
