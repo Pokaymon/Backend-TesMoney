@@ -1,4 +1,4 @@
-#Repositorio Inventario
+# Repositorio Inventario
 
-**Estudiante: ** Javier Andrés Socha Maldonado
-**Cloud Computing D191** 
+**Estudiante:** Javier Andrés Socha Maldonado  
+**Curso:** Cloud Computing D191
