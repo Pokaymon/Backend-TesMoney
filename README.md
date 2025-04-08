@@ -151,8 +151,55 @@ sudo certbot --apache -d tesmoney.ddnsfree.com
 
 Esto activará HTTPS y redirigirá automáticamente el tráfico HTTP a HTTPS.
 
-## 🔥 **Estructura Hexagonal**
+## 🔥⚙️ **Estructura Hexagonal**
 
+![image](https://github.com/user-attachments/assets/5b0b7294-e606-42c1-a468-feb04239c391)
+
+----
+
+## 🔥 **Knex.js para migraciones**
+
+- 🔸 Instala knex y el driver mysql
+
+```bash
+npm install knex mysql2
+npm install --save-dev knex
+npx knex init
+```
+
+- 🔸 Configurar knexfile.js
+
+```bash
+// knexfile.js
+import config from "./config.js";
+
+export default {
+  development: {
+    client: 'mysql2',
+    connection: {
+      host: config.host,
+      user: config.user,
+      password: config.password,
+      database: config.database,
+    },
+    migrations: {
+      directory: './src/migrations'
+    }
+  }
+};
+```
+
+- 🔸 Crea una migración
+
+```bash
+npx knex migrate:make create_users_table --knexfile knexfile.js
+```
+
+- 🔸 Ejecuta las migraciones
+
+```bash
+npx knex migrate:latest --knexfile knexfile.js
+```
 
 
 
