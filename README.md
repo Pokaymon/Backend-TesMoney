@@ -67,63 +67,6 @@ npm init -y
 npm install express
 ```
 
-- Crear archivo server.js
-```bash
-nano server.js
-```
-
-- Agregar codigo a server.js
-```bash
-const express = require("express");
-const app = express();
-
-app.get("/", (req, res) => {
-    res.send("Servidor Node.js con Express en EC2");
-});
-
-const PORT = 5000;
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
-```
-
-- Iniciar el Servidor
-```bash
-node server.js
-```
-
----
-
-## 🔥 **Mantener el Servidor Corriendo**
-
-Se puede hacer uso de pm2:
-
-- Instalar pm2
-```bash
-sudo npm install -g pm2
-```
-
-- Ejecutar App con pm2
-```bash
-pm2 start server.js --name TesBackend
-```
-
-- Guardar la configuración para el reinicio
-```bash
-pm2 save
-pm2 startup
-```
-
-- Ver Lista de Procesos en Ejecución
-```bash
-pm2 list
-```
-
-- Detener App
-```bash
-pm2 stop TesBackend
-```
-
 ---
 
 ## 💻 **Usar Apache2 como Proxy inverso para poder agregar un subdominio**
@@ -207,6 +150,10 @@ sudo certbot --apache -d tesmoney.ddnsfree.com
 ```
 
 Esto activará HTTPS y redirigirá automáticamente el tráfico HTTP a HTTPS.
+
+## 🔥 **Estructura Hexagonal**
+
+
 
 
 
