@@ -15,7 +15,7 @@ const getConnection = async () => {
     return connection;
 };
 
-console.log("🔐 Conectando con:", config);
+// console.log("🔐 Conectando con:", config);
 
 export default getConnection;
 
