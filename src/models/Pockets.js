@@ -28,6 +28,15 @@ const Pocket = {
     return rows[0];
   },
 
+  async findByNameAndUserId(name, user_id) {
+    const conn = await getConnection();
+    const [rows] = await conn.query(
+      'SELECT * FROM pockets WHERE name = ? AND user_id = ?',
+      [name, user_id]
+    );
+    return rows[0];
+  },
+
   async update(pocketId, { name, description, balance }) {
     const conn = await getConnection();
     await conn.query(

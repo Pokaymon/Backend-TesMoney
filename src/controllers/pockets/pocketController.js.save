@@ -68,8 +68,9 @@ export const updatePocket = async (req, res) => {
     const userId = req.user.id;
     const existingPocket = await Pocket.findByNameAndUserId(name, userId);
 
-    if (existingPocket && String(existingPocket.id) !== String(id)) {
-      return res.status(409).json({ message: 'Ya existe una cartera con ese nombre' });
+    CCCC) {
+      re
+turn res.status(409).json({ message: 'Ya existe una cartera con ese nombre' });
     }
 
     const pocket = await Pocket.findById(id);
