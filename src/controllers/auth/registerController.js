@@ -4,7 +4,7 @@ import User from '../../models/User.js';
 import { sendVerificationEmail } from '../../services/emailService.js';
 
 export const registerUser = async (req, res) => {
-  const { username, email, password, password_confirmation } = req.body;
+  const { username, email, password, password_confirmation, rol } = req.body;
 
   if (!username || !email || !password || !password_confirmation) {
     return res.status(400).json({ message: 'Todos los campos son obligatorios' });
@@ -28,7 +28,7 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const verification_token = crypto.randomBytes(32).toString('hex');
 
-    await User.create({ username, email, password: hashedPassword, verification_token });
+    await User.create({ username, email, password: hashedPassword, verification_token, rol });
     await sendVerificationEmail(email, verification_token);
 
     return res.status(201).json({ message: 'Usuario registrado, Verifica tu correo.' });

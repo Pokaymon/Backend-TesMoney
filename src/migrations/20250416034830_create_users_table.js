@@ -6,6 +6,7 @@ export function up(knex) {
       table.string('password', 255).notNullable(); // hasheada
       table.boolean('email_verified').defaultTo(false);
       table.string('verification_token', 255).nullable();
+      table.string('rol').defaultTo('cliente');
       table.timestamps(true, true); // created_at y updated_at con default a NOW()
     });
   }

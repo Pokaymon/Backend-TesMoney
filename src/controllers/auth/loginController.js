@@ -27,19 +27,20 @@ export const loginUser = async (req, res) => {
 
     // Token JWT
     const token = jwt.sign(
-      { id: user.id, username: user.username, email: user.email },
+      { id: user.id, username: user.username, email: user.email, rol: user.rol },
       config.jwtSecret,
       { expiresIn: config.jwtExpiresIn }
     );
 
-    return res.status(200).json({ 
-      message: 'Inicio de sesión exitoso', 
+    return res.status(200).json({
+      message: 'Inicio de sesión exitoso',
       token,
-      user: { 
-        id: user.id, 
-        username: user.username, 
-        email: user.email 
-      } 
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+	rol: user.rol
+      }
     });
   } catch (error) {
     console.error('Error al iniciar sesión:', error);
