@@ -9,8 +9,7 @@ const getConnection = async () => {
             host: config.host,
             database: config.database,
             user: config.user,
-            password: config.password,
-	    port: config.port
+            password: config.password
         });
     }
     return connection;

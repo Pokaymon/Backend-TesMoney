@@ -1,5 +1,18 @@
 import Pocket from '../../models/Pockets.js';
 
+// Uso Administrativo
+export const adminGetPocketsByUserId = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const pockets = await Pocket.findByUserId(userId);
+    return res.status(200).json(pockets);
+  } catch (error) {
+    console.error('Error al obtener carteras del usuario:', error);
+    return res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
 export const createPocket = async (req, res) => {
   const { name, description, balance } = req.body;
   const user_id = req.user.id; // Viene del token JWT decodificado
