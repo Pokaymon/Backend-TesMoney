@@ -7,10 +7,16 @@ const User = {
     return result[0];
   },
 
-  async create({ username, email, password, verification_token = null, rol = 'cliente', plan = 'basico' }) {
+  async findById(id) {
+    const conn = await getConnection();
+    const [result] = await conn.query('SELECT * FROM users WHERE id = ?', [id]);
+    return result[0];
+  },
+
+  async create({ username, email, password, verification_token = null, rol = 'cliente', plan = 'BASICO' }) {
     const conn = await getConnection();
     await conn.query(
-      'INSERT INTO users (username, email, password, verification_token, rol) VALUES (?, ?, ?, ?, ?, ?)',
+      'INSERT INTO users (username, email, password, verification_token, rol, plan) VALUES (?, ?, ?, ?, ?, ?)',
       [username, email, password, verification_token, rol, plan]
     );
   },
@@ -49,7 +55,23 @@ const User = {
       'UPDATE users SET email_verified = true, verification_token = NULL WHERE id = ?',
       [userId]
     );
+  },
+
+  async updateById(id, fields) {
+    const conn = await getConnection();
+
+    // Extraer claves y valores de los campos a actualizar
+    const keys = Object.keys(fields);
+    const values = Object.values(fields);
+
+    // Generar dinámicamente la parte del SET
+    const setClause = keys.map(key => `${key} = ?`).join(', ');
+
+    const query = `UPDATE users SET ${setClause} WHERE id = ?`;
+
+    await conn.query(query, [...values, id]);
   }
+
 };
 
 export default User;

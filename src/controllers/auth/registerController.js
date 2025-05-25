@@ -4,7 +4,7 @@ import User from '../../models/User.js';
 import { sendVerificationEmail } from '../../services/emailService.js';
 
 export const registerUser = async (req, res) => {
-  const { username, email, password, password_confirmation, rol } = req.body;
+  const { username, email, password, password_confirmation, rol, plan } = req.body;
 
   if (!username || !email || !password || !password_confirmation) {
     return res.status(400).json({ message: 'Todos los campos son obligatorios' });

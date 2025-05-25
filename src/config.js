@@ -7,7 +7,7 @@ export default {
     database : process.env.DATABASE,
     user : process.env.DB_USER,
     password : process.env.PASSWORD,
-    port : process.env.PORT,
+    port : process.env.DB_PORT,
     jwtSecret : process.env.JWT_SECRET,
     jwtExpiresIn : process.env.JWT_EXPIRES_IN
 }
