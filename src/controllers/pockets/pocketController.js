@@ -1,4 +1,5 @@
 import Pocket from '../../models/Pockets.js';
+import User from '../../models/User.js';
 
 // Uso Administrativo
 export const adminGetPocketsByUserId = async (req, res) => {
@@ -22,18 +23,47 @@ export const createPocket = async (req, res) => {
   }
 
   try {
+    // Obtener usuario para conocer su plan
+    const user = await User.findById(user_id);
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
 
-    // Verificar si existe ya una cartera con ese nombre
+    // Verificar si ya existe cartera con ese nombre para este usuario
     const existingPocket = await Pocket.findByNameAndUserId(name, user_id);
     if (existingPocket) {
       return res.status(409).json({ message: 'Ya existe una cartera con ese nombre' });
     }
 
+    // Contar cuántas carteras tiene el usuario actualmente
+    const userPockets = await Pocket.findByUserId(user_id);
+    const currentCount = userPockets.length;
+
+    // Definir límite según plan
+    const planLimits = {
+      BASICO: 1,
+      ESTANDAR: 3,
+      FAMILIAR: 5,
+      PROFESIONAL: 10,
+      EMPRESARIAL: Infinity
+    };
+
+    const userPlan = user.plan || 'BASICO';
+    const maxAllowed = planLimits[userPlan.toUpperCase()] ?? 1;
+
+    if (currentCount >= maxAllowed) {
+      return res.status(403).json({
+        message: `Has alcanzado el límite de carteras activas para el plan ${userPlan}. Por favor, elimina una cartera existente o actualiza tu plan.`
+      });
+    }
+
+    // Crear la cartera
     const pocketId = await Pocket.create({ user_id, name, description, balance });
     return res.status(201).json({
       message: 'Cartera creada exitosamente',
       pocketId
     });
+
   } catch (error) {
     console.error('Error al crear la cartera:', error);
     return res.status(500).json({ message: 'Error interno del servidor' });
