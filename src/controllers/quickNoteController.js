@@ -70,3 +70,21 @@ export const updateNote = async (req, res) => {
   }
 };
 
+// DELETE
+export const deleteNote = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    const note = await QuickNote.findOneAndDelete({ _id: id, userId });
+
+    if (!note) {
+      return res.status(404).json({ message: 'Nota no encontrada o acceso denegado' });
+    }
+
+    res.status(200).json({ message: 'Nota eliminada correctamente' });
+  } catch (error) {
+    console.error('Error al eliminar nota:', error);
+    res.status(500).json({ message: 'Error al eliminar nota' });
+  }
+};
