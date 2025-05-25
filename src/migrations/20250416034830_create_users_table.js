@@ -7,6 +7,7 @@ export function up(knex) {
       table.boolean('email_verified').defaultTo(false);
       table.string('verification_token', 255).nullable();
       table.string('rol').defaultTo('cliente');
+      table.string('plan').defaultTo('basico');
       table.timestamps(true, true); // created_at y updated_at con default a NOW()
     });
   }

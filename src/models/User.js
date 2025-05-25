@@ -7,11 +7,11 @@ const User = {
     return result[0];
   },
 
-  async create({ username, email, password, verification_token = null, rol = 'cliente' }) {
+  async create({ username, email, password, verification_token = null, rol = 'cliente', plan = 'basico' }) {
     const conn = await getConnection();
     await conn.query(
-      'INSERT INTO users (username, email, password, verification_token, rol) VALUES (?, ?, ?, ?, ?)',
-      [username, email, password, verification_token, rol]
+      'INSERT INTO users (username, email, password, verification_token, rol) VALUES (?, ?, ?, ?, ?, ?)',
+      [username, email, password, verification_token, rol, plan]
     );
   },
 
@@ -30,7 +30,7 @@ const User = {
 
   async getAll() {
     const conn = await getConnection();
-    const [rows] = await conn.query('SELECT id, username, email, rol FROM users');
+    const [rows] = await conn.query('SELECT id, username, email, rol, plan FROM users');
     return rows;
   },
 
