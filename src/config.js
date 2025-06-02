@@ -9,5 +9,6 @@ export default {
     password : process.env.PASSWORD,
     port : process.env.DB_PORT,
     jwtSecret : process.env.JWT_SECRET,
-    jwtExpiresIn : process.env.JWT_EXPIRES_IN
+    jwtExpiresIn : process.env.JWT_EXPIRES_IN,
+    agentSecret: process.env.AGENT_SECRET
 }
