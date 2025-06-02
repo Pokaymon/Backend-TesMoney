@@ -1,6 +1,6 @@
 import express from 'express';
 import { createTransaction, getTransactionsByPocket, deleteTransaction } from '../controllers/pockets/transactionController.js';
-import authMiddleware from '../middlewares/authMiddleware.js'; // middleware para verificar JWT
+import authMiddleware from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 

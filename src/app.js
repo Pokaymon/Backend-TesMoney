@@ -4,6 +4,7 @@ import pocketRoutes from "./routes/pocketRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import noteRoutes from "./routes/noteRoutes.js";
+import syncroRoutes from "./routes/syncroRoutes.js";
 import { connectMongoDB } from "./db/mongo.js";
 import cors from "cors";
 
@@ -21,5 +22,6 @@ app.use("/admin", adminRoutes);
 app.use("/pocket", pocketRoutes);
 app.use("/transactions", transactionRoutes);
 app.use("/api/notes", noteRoutes);
+app.use("/api/syncro", syncroRoutes);
 
 export default app;

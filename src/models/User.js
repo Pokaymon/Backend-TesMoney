@@ -21,6 +21,15 @@ const User = {
     );
   },
 
+  async createAndReturnId({ username, email, password, verification_token = null, rol = 'cliente', plan = 'BASICO' }) {
+    const conn = await getConnection();
+    const [result] = await conn.query(
+      'INSERT INTO users (username, email, password, verification_token, rol, plan) VALUES (?, ?, ?, ?, ?, ?)',
+      [username, email, password, verification_token, rol, plan]
+    );
+    return result.insertId;
+  },
+
   async existsByEmail(email) {
     const conn = await getConnection();
     const [result] = await conn.query('SELECT COUNT(*) AS count FROM users WHERE email = ?', [email]);

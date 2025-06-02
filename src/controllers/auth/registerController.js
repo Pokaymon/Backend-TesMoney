@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import User from '../../models/User.js';
+import Syncro from '../../models/Syncro.js';
 import { sendVerificationEmail } from '../../services/emailService.js';
 
 export const registerUser = async (req, res) => {
@@ -28,7 +29,22 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const verification_token = crypto.randomBytes(32).toString('hex');
 
-    await User.create({ username, email, password: hashedPassword, verification_token, rol, plan });
+    const userId = await User.createAndReturnId({
+      username,
+      email,
+      password: hashedPassword,
+      verification_token,
+      rol,
+      plan,
+    });
+
+    // Crear el Syncro en MongoDB
+    const existingSyncro = await Syncro.findOne({ userId: String(userId) });
+
+    if (!existingSyncro) {
+      await Syncro.create({ userId: String(userId), state: false });
+    }
+
     await sendVerificationEmail(email, verification_token);
 
     return res.status(201).json({ message: 'Usuario registrado, Verifica tu correo.' });
